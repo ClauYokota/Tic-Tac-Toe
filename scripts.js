@@ -7,92 +7,92 @@ const restartButton = document.querySelector("[data-restart-button]")
 const alert = document.querySelector("[data-alert]")
 const dataScore = document.querySelector("[data-score]")
 
-let isCircleTurn 
+let isCircleTurn
 
-let score = {X:0, O:0}
+let score = { X: 0, O: 0 }
 
 const winningCombinations = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
 ]
 
-const startGame = ()=>{
+const startGame = () => {
     isCircleTurn = false
 
-    for(const cell of cellElements){
+    for (const cell of cellElements) {
         cell.classList.remove('o')
         cell.classList.remove('x')
         cell.removeEventListener("click", handleClick)
-        cell.addEventListener("click", handleClick, {once:true})
+        cell.addEventListener("click", handleClick, { once: true })
     }
-    
+
     setBoardHoverClass()
     winningMessage.classList.remove('show-winning-message')
 
 }
 
-const endGame = (isDraw)=>{
-    if (isDraw){
+const endGame = (isDraw) => {
+    if (isDraw) {
         winningMessageText.innerText = "Draw!"
-        dataScore.innerText = "X:  " + score.X + "   -   O:  " + score.O 
-    }else{
+        dataScore.innerText = "X:  " + score.X + "   -   O:  " + score.O
+    } else {
         winningMessageText.innerText = isCircleTurn ? "O win!" : "X win!"
-        dataScore.innerText = "X:  " + score.X + "   -   O:  " + score.O 
+        dataScore.innerText = "X:  " + score.X + "   -   O:  " + score.O
     }
     winningMessage.classList.add('show-winning-message')
 }
 
-const restartGame =  ()=>{
+const restartGame = () => {
     score.O = 0
     score.X = 0
     startGame()
 }
 
 
-const checkForWin = (currentPlayer) =>{
-    return winningCombinations.some(combination =>{
-        return combination.every(index =>{
+const checkForWin = (currentPlayer) => {
+    return winningCombinations.some(combination => {
+        return combination.every(index => {
             return cellElements[index].classList.contains(currentPlayer)
         })
     })
 }
 
-const checkForDraw = ()=>{
-    return [... cellElements].every(cell =>{
+const checkForDraw = () => {
+    return [...cellElements].every(cell => {
         return cell.classList.contains('x') || cell.classList.contains("o")
     })
 }
 
 
-const placeMark = (cell, classToAdd) =>{
+const placeMark = (cell, classToAdd) => {
     cell.classList.add(classToAdd)
 }
 
-const setBoardHoverClass = ()=>{
+const setBoardHoverClass = () => {
     board.classList.remove('o')
     board.classList.remove('x')
 
-    if(isCircleTurn){
+    if (isCircleTurn) {
         board.classList.add('o')
         alert.innerText = "Turn - O"
-    }else{
+    } else {
         board.classList.add('x')
         alert.innerText = "Turn - X"
     }
 }
 
-const swapTurns = ()=>{
+const swapTurns = () => {
     isCircleTurn = !isCircleTurn
     setBoardHoverClass()
 }
 
-const handleClick = (e) =>{
+const handleClick = (e) => {
     //Colocar a marca X ou O
     const cell = e.target
     const classToAdd = isCircleTurn ? 'o' : 'x'
@@ -103,17 +103,17 @@ const handleClick = (e) =>{
     //Verificar por empate
     const isDraw = checkForDraw()
 
-    if(isWin){
-        if(isCircleTurn){
+    if (isWin) {
+        if (isCircleTurn) {
             score.O = score.O + 1
-        }else{
+        } else {
             score.X = score.X + 1
         }
-        endGame(false)   
+        endGame(false)
     }
-     else if (isDraw){
+    else if (isDraw) {
         endGame(true)
-    } else{
+    } else {
         //Mudar o símbolo
         swapTurns()
     }

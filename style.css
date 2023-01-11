@@ -1,18 +1,16 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
     height: 80vh;
     width: 100vw;
-    background: linear-gradient(
-        90deg, pink 0%, rgb(84, 179, 219) 100%
-    )
+    background: linear-gradient(90deg, pink 0%, rgb(84, 179, 219) 100%)
 }
 
-.board{
+.board {
     display: grid;
     width: 100%;
     height: 100%;
@@ -26,11 +24,11 @@ body{
 .board.x .cell:not(.x):not(.o):hover::after,
 .board.x .cell:not(.x):not(.o):hover::before,
 .board.o .cell:not(.x):not(.o):hover::after,
-.board.o .cell:not(.x):not(.o):hover::before{
-    background: rgb(255,255,255,0.3) !important;
+.board.o .cell:not(.x):not(.o):hover::before {
+    background: rgb(255, 255, 255, 0.3) !important;
 }
 
-.cell{
+.cell {
     width: 150px;
     height: 150px;
     border: 2px solid white;
@@ -40,23 +38,32 @@ body{
     cursor: pointer;
 }
 
-.cell:nth-child(1),.cell:nth-child(2),.cell:nth-child(3){
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3) {
     border-top: none;
 }
 
-.cell:nth-child(1),.cell:nth-child(4),.cell:nth-child(7){
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7) {
     border-left: none;
 }
 
-.cell:nth-child(7),.cell:nth-child(8),.cell:nth-child(9){
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
     border-bottom: none;
 }
 
-.cell:nth-child(3),.cell:nth-child(6),.cell:nth-child(9){
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
     border-right: none;
 }
 
-.cell.x, .cell.o{
+.cell.x,
+.cell.o {
     cursor: not-allowed;
 }
 
@@ -65,20 +72,21 @@ body{
 .cell.x::before,
 .cell.x::after,
 .board.x .cell:not(.x):not(.o):hover::after,
-.board.x .cell:not(.x):not(.o):hover::before
-{
+.board.x .cell:not(.x):not(.o):hover::before {
     content: "";
     height: calc(150px * 0.15);
     width: calc(150px * 0.9);
     background-color: white;
     position: absolute;
 }
+
 .cell.x::before,
-.board.x .cell:not(.x):not(.o):hover::before{
+.board.x .cell:not(.x):not(.o):hover::before {
     transform: rotate(45deg);
 }
+
 .cell.x::after,
-.board.x .cell:not(.x):not(.o):hover::after{
+.board.x .cell:not(.x):not(.o):hover::after {
     transform: rotate(-45deg);
 }
 
@@ -86,33 +94,31 @@ body{
 .cell.o::before,
 .cell.o::after,
 .board.o .cell:not(.x):not(.o):hover::before,
-.board.o .cell:not(.x):not(.o):hover::after{
+.board.o .cell:not(.x):not(.o):hover::after {
     content: "";
     position: absolute;
     border-radius: 50%;
 }
 
 .cell.o::before,
-.board.o .cell:not(.x):not(.o):hover::before
-{
+.board.o .cell:not(.x):not(.o):hover::before {
     height: calc(150px * 0.9);
     width: calc(150px * 0.9);
     background-color: white;
 }
 
 .cell.o::after,
-.board.o .cell:not(.x):not(.o):hover::after
-{
+.board.o .cell:not(.x):not(.o):hover::after {
     height: calc(100px * 0.9);
     width: calc(100px * 0.9);
-    background-color:rgb(175, 199, 209,0.8);
+    background-color: rgb(175, 199, 209, 0.8);
 }
 
 
 
 
 /*Mesagem de vitória*/
-.winning-message{
+.winning-message {
     display: none;
     position: fixed;
     top: 0;
@@ -121,11 +127,11 @@ body{
     bottom: 0;
     justify-content: center;
     align-items: center;
-    background: rgb(0, 0, 0,0.8);
+    background: rgb(0, 0, 0, 0.8);
     flex-direction: column;
 }
 
-.againButton{
+.againButton {
     font-size: 2.5rem;
     font-family: Arial, Helvetica, sans-serif;
     background-color: pink;
@@ -135,21 +141,21 @@ body{
     border: none;
     margin-top: 16px;
     margin-bottom: 5%;
-    color:rgb(3, 98, 138);
+    color: rgb(3, 98, 138);
 }
 
-.againButton:hover{
+.againButton:hover {
     background-color: rgb(3, 98, 138);
-    color:  pink;
+    color: pink;
 }
 
-.winningMessageText{
+.winningMessageText {
     color: white;
     font-size: 5rem;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.restartButton{
+.restartButton {
     font-size: 1.5rem;
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(104, 210, 255);
@@ -161,12 +167,12 @@ body{
     color: rgb(3, 98, 138);
 }
 
-.restartButton:hover{
-    background-color:  rgb(3, 98, 138);
-    color:rgb(104, 210, 255);
+.restartButton:hover {
+    background-color: rgb(3, 98, 138);
+    color: rgb(104, 210, 255);
 }
 
-.score{
+.score {
     color: rgb(255, 255, 255);
     font-size: 4rem;
     font-family: Arial, Helvetica, sans-serif;
@@ -175,11 +181,11 @@ body{
     padding: 5px;
 }
 
-.show-winning-message{
+.show-winning-message {
     display: flex;
 }
 
-.alert-turn{
+.alert-turn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,7 +193,7 @@ body{
     margin-top: 50px;
 }
 
-.alert-turn p{
+.alert-turn p {
     color: white;
     font-weight: bold;
     font-size: 4rem;
